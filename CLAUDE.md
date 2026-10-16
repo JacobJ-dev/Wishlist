@@ -1,3 +1,7 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 # Wishlist
 
 A simple wishlist web app for two people (me and my partner). Each person adds items they'd like. The other can see them and secretly mark items as bought. Portfolio project, built mobile-first (mainly used on a phone, developed on desktop).
@@ -10,6 +14,21 @@ Planned deploy: Vercel
 - React + Vite (plain JavaScript, ESLint, no React Compiler)
 - Tailwind CSS v4 via the `@tailwindcss/vite` plugin, with `@import "tailwindcss";` in `src/index.css`. No tailwind config files.
 - Supabase (auth, database, later realtime)
+
+## Commands
+
+- `npm run dev`: Vite dev server with HMR (add `-- --host` to open it on a phone on the same network)
+- `npm run lint`: ESLint over the whole repo (flat config in `eslint.config.js`)
+- `npm run build` / `npm run preview`: production build to `dist/` and serve it locally
+
+There is no test runner yet. Vite 8 needs Node 20.19+ or 22.12+.
+
+## Current structure
+
+- `index.html` → `src/main.jsx` (mounts `<App />` in `StrictMode`, imports `index.css`) → `src/App.jsx`.
+- `App.jsx` currently holds the whole page (header with `+` button and an empty state). Split pieces into `src/components/` as features land.
+- ESLint allows unused vars that start with a capital or `_` (`varsIgnorePattern: '^[A-Z_]'`).
+- `README.md` is still the Vite template boilerplate.
 
 ## How to work with me
 
@@ -67,7 +86,7 @@ My earlier project FamilyCart (github.com/JacobJ-dev/SupermarketListApp) has pie
 
 Starting from scratch. Work through these in order, one slice at a time.
 
-1. [ ] Scaffold: React + Vite + Tailwind v4 + ESLint, runs with `npm run dev`, first commit
+1. [x] Scaffold: React + Vite + Tailwind v4 + ESLint, runs with `npm run dev`, first commit
 2. [ ] Connect Supabase (env vars, client) and create `wishlist_items`
 3. [ ] Basic CRUD: list, add and delete items from Supabase
 4. [ ] Richer items (`short_desc`, `link`, `want_rating`) and the bottom sheet UI
@@ -80,6 +99,6 @@ Starting from scratch. Work through these in order, one slice at a time.
 
 Plan to connect the Supabase MCP server to this project (scoped to a single dev project with `project_ref`, never production data) so Claude Code can inspect the schema and help with migrations. Set this up after the scaffold is working.
 
-## First session
+## Next session
 
-Read this file, then use plan mode to propose how to scaffold milestone 1. Don't write any code until I've approved the plan.
+Milestone 1 is done. Use plan mode to propose milestone 2 (Supabase client + `wishlist_items` table). Don't write any code until I've approved the plan.
